@@ -24,7 +24,7 @@
         </div>
 
         <footer>
-        <button class="btn btn-link" style="color:#4B0A1E;">Add a Teaser</button>
+        <a href='#teasers/new' class="btn btn-link" style="color:#4B0A1E;" role="button">Add a Teaser</a>
         </footer>
 
     </div>
@@ -41,7 +41,7 @@
             <br/>
             <h4 style="color:#4B0A1E;">Question:</h4>
             <p><%= question %></p>
-            <button type="button" class="btn btn-lg" id="toggleButton" style="color:#4B0A1E;">View/Hide Solution</button>
+            <button type="button" class="btn btn-sm" id="toggleButton" style="color:#4B0A1E;">View/Hide Solution</button>
             <div style="display:none;" id='solutionDiv'>
             <h4 style="color:#4B0A1E;">Solution:</h4>
             <p><%= solution %></p>
@@ -53,7 +53,7 @@
             <button class="btn btn-link" id="deleteButton" style="color:#4B0A1E;">Delete</button>
         </script>
 
-        <script type="text/template" id="tpl-teaser-add-item">
+        <script type="text/template" id="tpl-teaser-edit-item">
 
             <h4 style="color:#4B0A1E;">Edit</h4>
             <form class="form-horizontal">
@@ -118,6 +118,71 @@
 
         </script>
 
+            <script type="text/template" id="tpl-teaser-add-item">
+
+            <h4 style="color:#4B0A1E;">Add</h4>
+            <form class="form-horizontal">
+
+            <div class="control-group">
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+            <input type="text" id="titleAddinput" style="width:450px;" name="title" placeholder="Title" > </input>
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="question">Question</label>
+            <div class="controls">
+            <textarea rows="5" id="questionAddinput" name="question" placeholder="Question" style="width:450px;"></textarea>
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="solution">Solution</label>
+            <div class="controls">
+            <textarea rows="8" id="solutionAddinput" name="solution" placeholder="Solution" style="width:450px;"></textarea>
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="image_url">Image Name</label>
+            <div class="controls">
+            <input type="text" id="image_name_add" style="width:250px;" name="image_url" >
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="category">Category</label>
+            <div class="controls">
+                <select name="category" id="category_add">
+                    <option>Logical</option>
+                    <option>Lateral</option>
+                    <option>Numerical</option>
+                    <option>Programmatical</option>
+                  </select> 
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="difficulty">Difficulty</label>
+            <div class="controls">
+                <select name="difficulty" id="difficulty_add">
+                    <option>Medium</option>
+                    <option>Easy</option>
+                    <option>Difficult</option>
+                    <option>Tough</option>
+                  </select> 
+            </div>
+            </div>
+            <div class="control-group">
+            <div class="controls">
+            <button class="btn btn-primary" id="addChanges">Submit</button>    
+            </div>
+            </div>
+        </form>  
+
+        </script>
+
         <script src="javascripts/lib/jquery.min.js"></script>    
         <script src="javascripts/lib/underscore-min.js"></script>
         <script src="javascripts/lib/backbone-min.js"></script>
@@ -127,6 +192,7 @@
         <script src="javascripts/views/teaserListItemView.js"></script>
         <script src="javascripts/views/teasersListView.js"></script>
         <script src="javascripts/views/teasersEditView.js"></script>
+        <script src="javascripts/views/teasersNewView.js"></script>
         <script src="javascripts/views/teasersView.js"></script>
         <script src="javascripts/routers/router.js"></script>
     </body>

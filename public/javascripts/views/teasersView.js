@@ -23,10 +23,6 @@ app.TeasersView = Backbone.View.extend({
         $( "#solutionDiv" ).toggle();
     },
 
-    edit: function(){
-        alert('edit request received');
-    },
-
     deleteModel: function(){
         //alert('delete request received');
         self = this;
@@ -34,17 +30,19 @@ app.TeasersView = Backbone.View.extend({
             success:function () {
                 alert('Teaser deleted successfully');
                 window.history.back();
-                self.remove();
                 self.unbind();
-                //this.$el.empty();
-                //this.unbind();
-                //
-                //$(this.el).unbind();
-                //$(this.el).remove();
+                self.remove();
             }
         });
         return false;
     }, 
+
+    close: function(){
+        console.log("Closing the view!");
+        this.unbind();
+        this.remove();
+
+    },
 
     render:function (eventName) {
         $(this.el).html(this.template(this.model.toJSON()));

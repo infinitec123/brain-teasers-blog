@@ -11,10 +11,25 @@ var app = app || {};
     }, 
 	
     routes: {
+
+            "teasers/new": "addTeaser",
             "": "initialLoad",
 			"teasers/:id":"teaserDetails",
             "teasers/edit/:id":"editTeaserDetails"
 	},
+
+    addTeaser: function(){
+        //console.log("Will add a new teaser!");
+        if(this.teasersView){
+            console.log('zombie found! Will kill it!');
+            this.teasersView.close();
+        }
+        if (!this.teasersList){
+            this.initialLoad();
+        }
+        this.teaserNewView = new app.TeasersNewView({model: new Teaser()});
+        $('#mainbar').html(this.teaserNewView.render().el);
+    },
 
     changeView: function(view) {
              if (this.currentView) {

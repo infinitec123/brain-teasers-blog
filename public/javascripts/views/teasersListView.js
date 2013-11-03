@@ -10,6 +10,8 @@ app.TeasersListView = Backbone.View.extend({
     initialize: function() {
 
         this.model.bind("reset", this.render, this);
+        this.model.bind("add", this.renderNewTeaser, this);
+        //this.model.bi
         //console.log('Inside initiallize of listview');
         var self = this;
         },
@@ -20,6 +22,11 @@ app.TeasersListView = Backbone.View.extend({
             $(this.el).append(new app.TeaserListItemView({model:teaser}).render().el);
         }, this);
         return this;
+    },
+
+    renderNewTeaser: function(item){
+        console.log("Will add new teaser to the list");
+        $(this.el).append(new app.TeaserListItemView({model:item}).render().el);
     }
 
 });
