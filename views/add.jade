@@ -1,0 +1,57 @@
+!!! 5
+html(lang='en')
+head
+    meta(charset='utf-8')
+    title BrainTeasers | Add Teaser
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(href='../stylesheets/bootstrap.css', rel='stylesheet')
+    link(href='../stylesheets/bootstrap-responsive.css', rel='stylesheet')
+  body
+    .container
+      .row
+        .span8
+          h2 Enter a Teaser
+          br
+          form.form-horizontal(action='/teasers', method='post')
+            .control-group
+              label.control-label(for='title') Title
+              .controls
+                input#titleinput(type='text', style='width: 450px;', placeholder='Title', name='title')
+            .control-group
+              label.control-label(for='question') Question
+              .controls
+                textarea(rows='5', placeholder='Question', name='question', style='width: 450px;')
+            .control-group
+              label.control-label(for='question') Solution
+              .controls
+                textarea(rows='8', name='solution', placeholder='Solution', style='width: 450px;')
+            .control-group
+              label.control-label(for='image_url') Image Name
+              .controls
+                input#image_name(type='text', style='width: 250px;', placeholder='Image Name', name='image_name')
+            .control-group
+              label.control-label(for='category') Category
+              .controls
+                select(name='category')
+                  option Logical
+                  option Lateral
+                  option Mathematical
+                  option Programmatical
+            .control-group
+              label.control-label(for='difficulty') Difficulty
+              .controls
+                select(name='difficulty')
+                  option Medium
+                  option Easy
+                  option Difficult
+                  option Tough
+            .control-group
+              .controls
+                input.btn.btn-primary.span2(type='submit', value='Submit')
+      hr
+      footer
+        p © Sharath Pandeshwar 2013
+    script(src='../javascripts/lib/jquery-1.7.2.min.js')
+    script(src='../javascripts/lib/bootstrap.min.js')

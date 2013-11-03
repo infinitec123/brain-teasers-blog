@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>BrainTeasers Blog</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap.css">
+        <link rel="stylesheet" href="stylesheets/bootstrap-responsive.css">
+    </head>
+    <body>
+
+
+    <div class="container">
+
+      <div class="hero-unit">
+        <h1 style="color:#4B0A1E;">Brain Teasers Blog!</h1>
+        <p>The most comprehensive collection of puzzles in one place, to help you ace that dream company or simply to rack your brain!</p>
+      </div>
+
+        <div id="sidebar">
+        </div>
+
+        <div id="mainbar">
+        </div>
+
+        <footer>
+        <button class="btn btn-link" style="color:#4B0A1E;">Add a Teaser</button>
+        </footer>
+
+    </div>
+
+        
+
+        <script type="text/template" id="tpl-teaser-list-item">
+            <a href='#teasers/<%= _id %>'><%= title %></a>
+        </script>
+
+        <script type="text/template" id="tpl-teaser-details">
+            <h2 style="color:#4B0A1E;"><%= title %></h2>
+            <img height="150" src="images/<%= image_name %>"/>
+            <br/>
+            <h4 style="color:#4B0A1E;">Question:</h4>
+            <p><%= question %></p>
+            <button type="button" class="btn btn-lg" id="toggleButton" style="color:#4B0A1E;">View/Hide Solution</button>
+            <div style="display:none;" id='solutionDiv'>
+            <h4 style="color:#4B0A1E;">Solution:</h4>
+            <p><%= solution %></p>
+            </div>
+            <h4 style="color:#4B0A1E;">Difficulty:</h4>
+            <p><%= difficulty %></p>
+            <br/>
+            <a href='#teasers/edit/<%= _id %>' class="btn btn-link" style="color:#4B0A1E;" role="button">Edit</a>
+            <button class="btn btn-link" id="deleteButton" style="color:#4B0A1E;">Delete</button>
+        </script>
+
+        <script type="text/template" id="tpl-teaser-add-item">
+
+            <h4 style="color:#4B0A1E;">Edit</h4>
+            <form class="form-horizontal">
+
+            <div class="control-group">
+            <label class="control-label" for="title">Title</label>
+            <div class="controls">
+            <input type="text" id="titleEditinput" style="width:450px;" name="title" value="<%= title %>" > </input>
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="question">Question</label>
+            <div class="controls">
+            <textarea rows="5" id="questionEditinput" name="question" style="width:450px;"><%= question %></textarea>
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="solution">Solution</label>
+            <div class="controls">
+            <textarea rows="8" id="solutionEditinput" name="solution" style="width:450px;"><%= solution %></textarea>
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="image_url">Image Name</label>
+            <div class="controls">
+            <input type="text" id="image_name_edit" style="width:250px;" value="<%= image_name %>" name="image_url" >
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="category">Category</label>
+            <div class="controls">
+                <select name="category" id="category_edit">
+                    <option>Logical</option>
+                    <option>Lateral</option>
+                    <option>Numerical</option>
+                    <option>Programmatical</option>
+                  </select> 
+            </div>
+            </div>
+
+            <div class="control-group">
+            <label class="control-label" for="difficulty">Difficulty</label>
+            <div class="controls">
+                <select name="difficulty" id="difficulty_edit">
+                    <option>Medium</option>
+                    <option>Easy</option>
+                    <option>Difficult</option>
+                    <option>Tough</option>
+                  </select> 
+            </div>
+            </div>
+            <div class="control-group">
+            <div class="controls">
+            <button class="btn btn-primary" id="saveEditChanges">Submit</button>    
+            </div>
+            </div>
+        </form>  
+
+        </script>
+
+        <script src="javascripts/lib/jquery.min.js"></script>    
+        <script src="javascripts/lib/underscore-min.js"></script>
+        <script src="javascripts/lib/backbone-min.js"></script>
+        <script src="javascripts/lib/backbone-validation.js"></script>
+        <script src="javascripts/models/teaser.js"></script>
+        <script src="javascripts/collections/teasers.js"></script>
+        <script src="javascripts/views/teaserListItemView.js"></script>
+        <script src="javascripts/views/teasersListView.js"></script>
+        <script src="javascripts/views/teasersEditView.js"></script>
+        <script src="javascripts/views/teasersView.js"></script>
+        <script src="javascripts/routers/router.js"></script>
+    </body>
+</html>
+
+<!--
+
+        <script src="javascripts/app.js"></script>
+
+        
+        <script src="javascripts/app.js"></script>
+
+
+        <script src="javascripts/routers/router.js"></script>
+
+-->
