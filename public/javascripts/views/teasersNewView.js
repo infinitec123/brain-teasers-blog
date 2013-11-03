@@ -18,12 +18,37 @@ app.TeasersNewView = Backbone.View.extend({
     },
 
     addChanges: function(event){
-        alert("Will try to add!");
+        //alert("Will try to add!");
+        console.log("TeasersNewView:: Will try to add");
         event.preventDefault();
 
         //this.newTeaser = new app.Teaser();
+        var temp = {};
+        temp['title'] =  $('#titleAddinput').val();
+        temp['solution'] =  $('#solutionAddinput').val();
+        temp['question'] = $('#questionAddinput').val();
+        temp['image_name'] = $('#image_name_add').val();
+        temp['category'] = $('#category_add').val();
+        temp['difficulty'] = $('#difficulty_add').val();
+        var self = this;
+        app.teasersList.create(temp, {
+                success:function (_teaser) {
+                    console.log("successfully saved and returned");
+                    $(self.el).unbind();
+                    self.remove();
+                    console.log("Printing from teasersNewView");
+                    console.log(_teaser);
+                    app.TeaserRouter.navigate('teasers/' + _teaser.get('_id'), { trigger: true });
+                }
+        });
 
-        this.model .set({
+
+        //app.teasersList.create( temp );
+        //$(this.el).unbind();
+        //this.remove();
+        //app.TeaserRouter.navigate('teasers/' + self.model.id, { trigger: true });
+
+      /*  this.model.set({
             title:$('#titleAddinput').val(),
             question:$('#questionAddinput').val(),
             solution:$('#solutionAddinput').val(),
@@ -32,19 +57,17 @@ app.TeasersNewView = Backbone.View.extend({
             difficulty:$('#difficulty_add').val()
         });
 
-        console.log(this.model);
         var self = this;
-        
-        app.Teasers.create(this.model, {
+        app.teasersList.create(this.model, {
                 success:function () {
-                    console.log("Saved successfully!");
-                    app.TeaserRouter('teasers/' + self.model.id, false);
+                    console.log("successfully saved and returned" + self.model.id);
+                    $(self.el).unbind();
+                    self.remove();
+                    app.TeaserRouter.navigate('teasers/' + self.model.id, { trigger: true });
                 }
-        }); 
+        }); */
 
-       /* this.model.save(); 
-        $(this.el).unbind();
-        this.remove();
+    /*   this.model.save(); 
         //window.history.back();
         app.TeaserRouter.navigate('teasers/' + this.model.get('_id'), { trigger: true }); */
         return false;

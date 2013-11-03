@@ -24,10 +24,10 @@ var app = app || {};
             console.log('zombie found! Will kill it!');
             this.teasersView.close();
         }
-        if (!this.teasersList){
+        if (!app.teasersList){
             this.initialLoad();
         }
-        this.teaserNewView = new app.TeasersNewView({model: new Teaser()});
+        this.teaserNewView = new app.TeasersNewView({model: new app.Teaser()});
         $('#mainbar').html(this.teaserNewView.render().el);
     },
 
@@ -45,10 +45,10 @@ var app = app || {};
     initialLoad: function(){
         //console.log('Inside router for intial load');
         var self = this;   
-        this.teasersList = new app.Teasers();
-        this.teasersList.fetch({
+        app.teasersList = new app.Teasers();
+        app.teasersList.fetch({
         success:function () {
-                self.teasersListView = new app.TeasersListView({model:self.teasersList});
+                self.teasersListView = new app.TeasersListView({model:app.teasersList});
                 $('#sidebar').html(self.teasersListView.render().el);
                 if(self.requestedId) self.teaserDetails(self.requestedId);
             }
@@ -57,8 +57,8 @@ var app = app || {};
     },  
 
     teaserDetails: function(id){
-        if(this.teasersList){
-            this.teaser = this.teasersList.get(id);
+        if(app.teasersList){
+            this.teaser = app.teasersList.get(id);
             if(this.teasersView) {
                 this.teasersView.remove();
             }
@@ -72,7 +72,7 @@ var app = app || {};
     },
 
     editTeaserDetails: function(id){
-            this.changeView(new app.TeasersEditView({model: this.teasersList.get(id)}));
+            this.changeView(new app.TeasersEditView({model: app.teasersList.get(id)}));
     }    
 
 	});

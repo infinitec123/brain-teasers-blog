@@ -24,8 +24,13 @@ app.post('/teasers', function (req, res) {
 		res.send(400);
      	return;
 	}
-	models.Teaser.addTeaser(_title, _question, _solution, _category, _difficulty, _image_name);
-	res.send('Teaser Saved');
+	console.log("Will call model method");
+	models.Teaser.addTeaser(_title, _question, _solution, _category, _difficulty, _image_name, function(_teaser){
+		console.log("Back to router");
+		console.log(_teaser);
+		res.send(_teaser);
+	});
+	
 });
 
 app.put('/teasers/:id', function (req, res) {

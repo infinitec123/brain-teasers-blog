@@ -47,7 +47,7 @@ var Teaser = mongoose.model('Teaser', TeaserSchema );
       
   };
 
-  var addTeaser = function(_title, _question, _solution, _category, _difficulty, _image_name) {
+  var addTeaser = function(_title, _question, _solution, _category, _difficulty, _image_name, callback) {
 
     var _teaser = new Teaser({
       title: _title,
@@ -58,7 +58,15 @@ var Teaser = mongoose.model('Teaser', TeaserSchema );
       category: _category
     });
 
-    _teaser.save(registerCallback);
+    _teaser.save(function( err ) {
+                if( !err ) {
+                        console.log( 'created' );
+                        callback(_teaser);
+
+                } else {
+                        return console.log( err );
+                }
+        });
     console.log('Save command was sent');
   };
 

@@ -3,8 +3,6 @@ var app = app || {};
 (function () {
 	'use strict';
 
-_.extend(Backbone.Model.prototype, Backbone.Validation.mixin);
-
 app.Teaser = Backbone.Model.extend({
     defaults: {
     	title: 'No title',
@@ -17,19 +15,6 @@ app.Teaser = Backbone.Model.extend({
 
 		idAttribute: '_id',
 
-        validation: {
-         title: {
-           required: true
-        }, 
-        question: {
-            required: true,
-            minLength: 8
-        },
-        solution:{
-            required: true,
-            minLength: 8
-        }
-        }
 });
 
 })();
