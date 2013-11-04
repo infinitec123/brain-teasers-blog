@@ -13,6 +13,7 @@ app.TeasersListView = Backbone.View.extend({
         var self = this;
         this.listenTo( app.teasersList, 'add', this.renderTeaser );
         this.listenTo( app.teasersList, 'reset', this.render);
+        this.listenTo( app.teasersList, 'filtered', this.render2);
         //this.listenTo( app.teasersList, 'sync', this.renderOnSync);
     /*    this.model.bind("add", function(item){
                     console.log(item.toJSON());
@@ -25,17 +26,17 @@ app.TeasersListView = Backbone.View.extend({
     },
 
     triggerFilter: function(e){
-        //alert($(e.currentTarget).val());
-        console.log($(e.currentTarget).val());
         app.chosenFilter = $(e.currentTarget).val();
-       // app.teasersList('filter');
-       //var result = app.teasersList.where({category: app.chosenFilter});
-       //console.log(result);
-       //console.log(result.length);
+        app.TeaserRouter.navigate('filter/' + app.chosenFilter, {trigger: true});
+    },
+
+    render2: function(){
+        console.log("filtered received");
+        console.log(this.teasersList);
     },
 
     render:function (eventName) {
-
+         
          $(this.el).html(this.template);
          $(this.el).append("<ul>");
 
@@ -67,7 +68,13 @@ app.TeasersListView = Backbone.View.extend({
         //$('#sidebar').html($(this.el));
         //console.log($(this.el));
         //return this;
-    }
+    },
+
+    close: function(){
+        console.log("Closing the teasers listView!");
+        this.unbind();
+        this.remove();
+    },
 
 });
 

@@ -8,6 +8,7 @@ var app = app || {};
 
     initialize: function() {
         //console.log("initialize of router");   
+        app.chosenFilter = "All";
     }, 
 	
     routes: {
@@ -19,7 +20,28 @@ var app = app || {};
             "": "initialLoad"
 	},
 
-    manageFilter: function(){
+    manageFilter: function(_filter){
+        console.log("Received request to filter" + _filter);
+        
+        //console.log(result); 
+        if(_filter == "All"){
+            app.teasersList = app.masterList;
+        } else {
+            var result = app.masterList.where({category: _filter});
+            app.teasersList = new app.Teasers(result); 
+        }
+        
+        if(this.teasersView){
+            this.teasersView.close();
+        }
+        if(this.teaserNewView){
+           this.teaserNewView.close(); 
+        }
+        this.mainLoad(app.teasersList);
+        // app.teasersList.trigger('filtered');
+        //console.log(app.teasersList);
+        //this.teasersListView = new app.TeasersListView({model:app.teasersList});
+        //$('#sidebar').html(this.teasersListView.render().el);
 
     },
 
@@ -52,38 +74,37 @@ var app = app || {};
     },
 
     initialLoad: function(){
-        console.log('Inside router for intial load');      
-        app.teasersList = new app.Teasers();
+        console.log('Inside router for intial load');  
+        app.masterList = new app.Teasers();    
+        //app.teasersList = new app.Teasers();
         var self = this;   
-        app.teasersList.fetch({
+        app.masterList.fetch({
         success:function () {
-                self.mainLoad(app.teasersList, "All");    
+                app.teasersList = app.masterList;
+                self.mainLoad(app.teasersList);    
             }
         });
     }, 
 
-    mainLoad: function(_collection, _filter){
+    mainLoad: function(_collection){
         console.log('Inside main load'); 
-        if(_filter == "All"){
-                this.teasersListView = new app.TeasersListView({model:app.teasersList});
+                this.teasersListView = new app.TeasersListView({model:_collection}); 
                 $('#sidebar').html(this.teasersListView.render().el);
+                $("#filter").val(app.chosenFilter);
 
                 if(!app.addTeaserRequest) { //main load first time with or without id.
-                    console.log("Should not have come here!" + !app.addTeaserRequest );
+                    //console.log("Should not have come here!" + !app.addTeaserRequest );
                     if(this.requestedId) {
                         this.teaserDetails(this.requestedId);
                     } else {
-                        this.teaserDetails(app.teasersList.at(0).get('_id'));
+                        if(app.teasersList.length > 0)  this.teaserDetails(app.teasersList.at(0).get('_id'));     
                     }  
                 } else { //Its main load for add
                         this.teaserNewView = new app.TeasersNewView({model: new app.Teaser()});
                         $('#mainbar').html(this.teaserNewView.render().el);
                         app.addTeaserRequest = false;
                 }
-        } else {
-            console.log("Will have to filter");
-        }
-    }, 
+        }, 
 
 /*    teaserDetails: function(id){
         if(app.reload){
