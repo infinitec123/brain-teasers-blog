@@ -13,15 +13,15 @@ var app = app || {};
     routes: {
 
             "teasers/new": "addTeaser",
-            "": "initialLoad",
+            "teasers/edit/:id":"editTeaserDetails",
 			"teasers/:id":"teaserDetails",
-            "teasers/edit/:id":"editTeaserDetails"
+            "": "initialLoad"
 	},
 
     addTeaser: function(){
         //console.log("Will add a new teaser!");
         if(this.teasersView){
-            console.log('zombie found! Will kill it!');
+            //console.log('zombie found! Will kill it!');
             this.teasersView.close();
         }
         if (!app.teasersList){
@@ -43,9 +43,9 @@ var app = app || {};
     },
 
     initialLoad: function(){
-        //console.log('Inside router for intial load');
-        var self = this;   
+        //console.log('Inside router for intial load');      
         app.teasersList = new app.Teasers();
+        var self = this;   
         app.teasersList.fetch({
         success:function () {
                 self.teasersListView = new app.TeasersListView({model:app.teasersList});
@@ -53,23 +53,29 @@ var app = app || {};
                 if(self.requestedId) self.teaserDetails(self.requestedId);
             }
         });
-        //new app.AppView();
     },  
 
     teaserDetails: function(id){
-        if(app.teasersList){
-            this.teaser = app.teasersList.get(id);
-            if(this.teasersView) {
-                this.teasersView.remove();
-            }
-            this.teasersView = new app.TeasersView({model: this.teaser});
-            $('#mainbar').html(this.teasersView.render().el);
-        } else {
+        if(app.reload){
+            //console.log("Reload request;");
+            app.reload = false;
             this.requestedId = id;
             this.initialLoad();
-        }
+            utils.showAlert('Success!', 'Teaser saved successfully', 'alert-success');
 
+        } else {
+            if(app.teasersList){
+                this.teaser = app.teasersList.get(id);
+                if(this.teasersView)  this.teasersView.remove();                
+                this.teasersView = new app.TeasersView({model: this.teaser});
+                $('#mainbar').html(this.teasersView.render().el);
+        } else {
+                this.requestedId = id;
+                this.initialLoad();
+                }
+        }
     },
+
 
     editTeaserDetails: function(id){
             this.changeView(new app.TeasersEditView({model: app.teasersList.get(id)}));

@@ -24,10 +24,10 @@ app.post('/teasers', function (req, res) {
 		res.send(400);
      	return;
 	}
-	console.log("Will call model method");
+	//console.log("Will call model method");
 	models.Teaser.addTeaser(_title, _question, _solution, _category, _difficulty, _image_name, function(_teaser){
-		console.log("Back to router");
-		console.log(_teaser);
+		//console.log("Back to router");
+		//console.log(_teaser);
 		res.send(_teaser);
 	});
 	

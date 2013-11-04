@@ -4,6 +4,9 @@ var app = app || {};
 	'use strict';
 
 app.Teaser = Backbone.Model.extend({
+
+    urlRoot: "/teasers",
+
     defaults: {
     	title: 'No title',
     	question: 'No question',
@@ -13,7 +16,7 @@ app.Teaser = Backbone.Model.extend({
     	category:'Logical'
     },
 
-		idAttribute: '_id',
+	idAttribute: '_id',
 
 });
 
