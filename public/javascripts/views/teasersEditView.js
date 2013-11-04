@@ -10,7 +10,7 @@ app.TeasersEditView = Backbone.View.extend({
     template:_.template($('#tpl-teaser-edit-item').html()),
     
     initialize: function() {
-        Backbone.Validation.bind(this);       
+        //Backbone.Validation.bind(this);       
     },
 
     events:{

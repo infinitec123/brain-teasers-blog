@@ -29,7 +29,20 @@
 
     </div>
 
-        
+        <script type="text/template" id="sidebar-template">
+            <div class="control-group">
+            <label class="control-label" for="filter">Filter:</label>
+            <div class="controls">
+                <select name="filter" id="filter">
+                    <option>All</option>
+                    <option>Logical</option>
+                    <option>Lateral</option>
+                    <option>Mathematical</option>
+                    <option>Programmatical</option>
+                  </select> 
+            </div>
+            </div>
+        </script>
 
         <script type="text/template" id="tpl-teaser-list-item">
             <a href='#teasers/<%= _id %>'><%= title %></a>
@@ -51,6 +64,16 @@
             <br/>
             <a href='#teasers/edit/<%= _id %>' class="btn btn-link" style="color:#4B0A1E;" role="button">Edit</a>
             <button class="btn btn-link" id="deleteButton" style="color:#4B0A1E;">Delete</button>
+            
+            <div class="row-fluid status-bar">
+                <div class="span5">
+                 <div class="alert alert-success alert-dismissable" style="display: none">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <b>Success!</b> Teaser saved successfully!
+                </div>
+                </div>
+            </div>
+
         </script>
 
         <script type="text/template" id="tpl-teaser-edit-item">
@@ -92,7 +115,7 @@
                 <select name="category" id="category_edit">
                     <option>Logical</option>
                     <option>Lateral</option>
-                    <option>Numerical</option>
+                    <option>Mathematical</option>
                     <option>Programmatical</option>
                   </select> 
             </div>
@@ -157,7 +180,7 @@
                 <select name="category" id="category_add">
                     <option>Logical</option>
                     <option>Lateral</option>
-                    <option>Numerical</option>
+                    <option>Mathematical</option>
                     <option>Programmatical</option>
                   </select> 
             </div>
@@ -180,6 +203,13 @@
             </div>
             </div>
         </form>  
+            <div class="row-fluid status-bar">
+                <div class="span4">
+                 <div class="alert alert-success" style="display: none">
+                    <b>Success!</b> Teaser saved successfully
+                </div>
+                </div>
+            </div>
 
         </script>
 

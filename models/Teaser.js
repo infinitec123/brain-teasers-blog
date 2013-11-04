@@ -64,7 +64,9 @@ var Teaser = mongoose.model('Teaser', TeaserSchema );
                         callback(_teaser);
 
                 } else {
+                        callback(false);
                         return console.log( err );
+
                 }
         });
     console.log('Save command was sent');

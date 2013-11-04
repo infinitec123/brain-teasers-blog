@@ -38,7 +38,7 @@ app.TeasersView = Backbone.View.extend({
     }, 
 
     close: function(){
-        console.log("Closing the view!");
+        console.log("Closing the teasersView!");
         this.unbind();
         this.remove();
 

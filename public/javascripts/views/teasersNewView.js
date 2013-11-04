@@ -34,20 +34,28 @@ app.TeasersNewView = Backbone.View.extend({
 
         this.model.save(null, {
             success: function (model) {
-               // self.render();
+
+                if (!model.has('_id')) {
+                    console.log("Model Save Failed!");
+                    utils.showAlert('Error', 'Teaser Save Failed!', 'alert-error');
+                    return;
+                }
                 console.log("Model Saved!");
                 $(self.el).unbind();
                 self.remove();
-                app.reload = true;
+                app.teasersList.add(model);
                 app.TeaserRouter.navigate('teasers/' + self.model.id, { trigger: true });
-                utils.showAlert('Success!', 'Teaser saved successfully', 'alert-success');
-            },
-            error: function () {
-                console.log("Model Save Failed!");
-                utils.showAlert('Error', 'An error occurred while trying to save this item', 'alert-error');
+                utils.showAlert('Success!', 'Teaser saved successfully', 'alert-success','alert-dismissable');
             }
         });
     },
+
+    close: function(){
+        console.log("Closing the teasersNewView!");
+        this.unbind();
+        this.remove();
+    },
+
 
     render:function (eventName) {
         //console.log("Edit " + this.model.get('title'));
