@@ -40,11 +40,6 @@ var app = app || {};
            this.teaserNewView.close(); 
         }
         this.mainLoad(app.teasersList);
-        // app.teasersList.trigger('filtered');
-        //console.log(app.teasersList);
-        //this.teasersListView = new app.TeasersListView({model:app.teasersList});
-        //$('#sidebar').html(this.teasersListView.render().el);
-
     },
 
     addTeaser: function(){

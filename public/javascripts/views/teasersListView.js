@@ -24,8 +24,13 @@ app.TeasersListView = Backbone.View.extend({
     triggerFilter: function(e){
         app.chosenFilter = $(e.currentTarget).val();
         console.log("ListView: Filtering request for " + app.chosenFilter );
-        console.log(Backbone.history.fragment);
-        app.TeaserRouter.navigate('teasers/page/1', {trigger: true});
+        var curr_url = Backbone.history.fragment;
+        var new_url = "teasers/page/1"; 
+
+        if (curr_url == new_url){ //small hack to prevent problem of router not triggering the route on same url.
+            new_url = "";
+        }
+        app.TeaserRouter.navigate(new_url, {trigger: true});
     },
 
     render:function (eventName) {
@@ -47,13 +52,6 @@ app.TeasersListView = Backbone.View.extend({
         $(this.el).append("</ul>");
         $(this.el).append(new app.Paginator({model: this.model, page: this.page}).render().el);
         return this;
-
-       // _.each(this.model.models, function (teaser) {
-            //$(this.el).append(new app.TeaserListItemView({model:teaser}).render().el);
-       // }, this);
-
-
-
     },
 
     renderTeaser: function(item){
