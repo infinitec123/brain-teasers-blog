@@ -104,3 +104,24 @@ label {
 button {
     padding: 6px;
 }
+
+
+a.plain:link {
+    color: #333;
+    text-decoration: none;
+}
+
+a.plain:active {
+    color: #333;
+    text-decoration: none;
+}
+
+a.plain:visited {
+    color: #333;
+    text-decoration: none;
+}
+
+a.plain:hover {
+    color: #333;
+    text-decoration: none;
+}
