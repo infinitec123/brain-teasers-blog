@@ -9,6 +9,7 @@ var app = app || {};
     initialize: function() {
         //console.log("initialize of router");   
         app.chosenFilter = "All";
+        app.docsPerPage = 4;
     }, 
 	
     routes: {
@@ -45,18 +46,20 @@ var app = app || {};
     addTeaser: function(){
         console.log("Will add a new teaser!");
         app.addTeaserRequest = true;
-        if(this.teasersView){
-            //console.log('zombie found! Will kill it!');
-            this.teasersView.close();
-        }
-        if (!app.teasersList){
+        app.chosenFilter = "All";
+
+        if(this.teasersView)    this.teasersView.close();
+        this.initialLoad();
+
+
+    /*    if (!app.teasersList){
             this.initialLoad(); //If it's direct link initial load will load add form as well. Sync problem other wise.
         } else{ // else u have to take care of populating side view.
                 this.teaserNewView = new app.TeasersNewView({model: new app.Teaser()});
                 $('#mainbar').html(this.teaserNewView.render().el);
                 app.addTeaserRequest = false;
         }
-        console.log("Finished addteaser");
+        console.log("Finished addteaser"); */
     },
 
     changeView: function(view) {
@@ -116,7 +119,7 @@ var app = app || {};
                 } else {
                         if(app.teasersList.length > 0) {
                             //var Pos = Math.min(startPos + 4, len);
-                            this.teaserDetails(app.teasersList.at((this.p-1)*4).get('_id')); 
+                            this.teaserDetails(app.teasersList.at((this.p-1)*app.docsPerPage).get('_id')); 
                         }     
                     }  
             } else { //Its main load for add

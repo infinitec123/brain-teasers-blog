@@ -38,8 +38,8 @@ app.TeasersListView = Backbone.View.extend({
         //var teasers = this.model.models;
         var len = this.model.models.length;
         //console.log(this.page);
-        var startPos = (parseInt(this.options.page) - 1) * 4;
-        var endPos = Math.min(startPos + 4, len);
+        var startPos = (parseInt(this.options.page) - 1) * app.docsPerPage;
+        var endPos = Math.min(startPos + app.docsPerPage, len);
         //console.log("startPos" + startPos + "length" + len + "endPos" + endPos);
 
          $(this.el).html(this.template);

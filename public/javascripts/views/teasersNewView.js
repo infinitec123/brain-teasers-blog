@@ -32,6 +32,13 @@ app.TeasersNewView = Backbone.View.extend({
             difficulty:$('#difficulty_add').val()
         });
 
+        var check = this.model.validateAll();
+        
+        if (check.isValid === false) {
+            utils.displayValidationErrors(check.messages);
+            return false;
+        }
+
         this.model.save(null, {
             success: function (model) {
 
@@ -44,6 +51,7 @@ app.TeasersNewView = Backbone.View.extend({
                 $(self.el).unbind();
                 self.remove();
                 app.teasersList.add(model);
+                app.masterList.add(model);
                 app.TeaserRouter.navigate('teasers/' + self.model.id, { trigger: true });
                 utils.showAlert('Success!', 'Teaser saved successfully', 'alert-success','alert-dismissable');
             }
