@@ -19,7 +19,7 @@ app.Paginator = Backbone.View.extend({
 
         var items = this.model.models;
         var len = items.length;
-        var pageCount = Math.ceil(len / 4);
+        var pageCount = Math.ceil(len / app.docsPerPage);
 
         $(this.el).html('<ul />');
 
