@@ -45,10 +45,10 @@ mongoose.connect(dbPath, function onMongooseError(err) {
 
 //Invoke the server
 
-var port = process.env.PORT || 6873;
+var port = process.env.PORT || 8080;
 
 app.listen(port, function() {
-	console.log('Express server listening on port');
+	console.log('Express server listening on port:' + port);
 });
 
 // Import the routes
