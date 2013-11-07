@@ -12,7 +12,7 @@ var routes = require('./routes/index.js');
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 8080);
+//app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -35,14 +35,20 @@ var mongoose = require('mongoose');
 var models = {
   Teaser: require('./models/Teaser')(app, mongoose)
 };
+
+var dbPath = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/TeaserBlog';
+
 var dbPath      = 'mongodb://localhost/TeaserBlog';
 mongoose.connect(dbPath, function onMongooseError(err) {
     if (err) throw err;
 });
 
 //Invoke the server
+
+var port = process.env.PORT || 5000;
+
 app.listen(app.get('port'), function() {
-	console.log('Express server listening on 8080');
+	console.log('Express server listening on port');
 });
 
 // Import the routes
