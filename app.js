@@ -36,9 +36,9 @@ var models = {
   Teaser: require('./models/Teaser')(app, mongoose)
 };
 
-var dbPath = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/TeaserBlog';
+var dbPath = process.env.MONGOLAB_URI || 'mongodb://localhost/TeaserBlog';
 
-var dbPath      = 'mongodb://localhost/TeaserBlog';
+//var dbPath      = 'mongodb://localhost/TeaserBlog';
 mongoose.connect(dbPath, function onMongooseError(err) {
     if (err) throw err;
 });
