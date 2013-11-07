@@ -10,8 +10,11 @@ app.TeaserListItemView = Backbone.View.extend({
     template: _.template( $( '#tpl-teaser-list-item' ).html() ),
 
     initialize:function () {
-        this.model.bind("change", this.render, this);
-        this.model.bind("destroy", this.close, this);
+        //this.model.bind("change", this.render, this);
+        //this.model.bind("destroy", this.close, this);
+
+        this.listenTo( this.model, 'change', this.render );
+        this.listenTo( this.model, 'destroy', this.close);
     },
 
     render: function() {

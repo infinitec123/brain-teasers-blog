@@ -27,10 +27,12 @@ app.TeasersListView = Backbone.View.extend({
         var curr_url = Backbone.history.fragment;
         var new_url = "teasers/page/1"; 
 
-        if (curr_url == new_url){ //small hack to prevent problem of router not triggering the route on same url.
-            new_url = "";
-        }
-        app.TeaserRouter.navigate(new_url, {trigger: true});
+        this.options.vent.trigger("filterrequest", app.chosenFilter);
+
+        //if (curr_url == new_url){ //small hack to prevent problem of router not triggering the route on same url.
+          //  new_url = "";
+        //}
+        app.TeaserRouter.navigate("", {trigger: false});
     },
 
     render:function (eventName) {
@@ -60,8 +62,8 @@ app.TeasersListView = Backbone.View.extend({
 
     close: function(){
         console.log("Closing the teasers listView!");
-        this.unbind();
         this.remove();
+        this.unbind();
     },
 
 });

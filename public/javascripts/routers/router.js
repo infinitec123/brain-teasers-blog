@@ -4,12 +4,19 @@ var app = app || {};
 (function () {
 	'use strict';
 
+    var vent = {};
+
 	var TeaserRouter = Backbone.Router.extend({
 
     initialize: function() {
         //console.log("initialize of router");   
         app.chosenFilter = "All";
         app.docsPerPage = 4;
+        _.extend(vent, Backbone.Events);
+        //console.log(vent);
+        _.bindAll(this, "mF");
+        vent.bind("filterrequest", this.mF);
+
     }, 
 	
     routes: {
@@ -23,24 +30,12 @@ var app = app || {};
 	},
 
 
-    manageFilter: function(_filter){ //
-        console.log("Received request to filter" + _filter);
-        
-        //console.log(result); 
-        if(_filter == "All"){
-            app.teasersList = app.masterList;
-        } else {
-            var result = app.masterList.where({category: _filter});
-            app.teasersList = new app.Teasers(result); 
-        }
-        
-        if(this.teasersView){
-            this.teasersView.close();
-        }
-        if(this.teaserNewView){
-           this.teaserNewView.close(); 
-        }
-        this.mainLoad(app.teasersList);
+
+    mF: function(_f){
+        //console.log("Heard an event from ListView!");
+        //console.log(_f);
+
+        this.initialLoad();
     },
 
     addTeaser: function(){
@@ -50,16 +45,6 @@ var app = app || {};
 
         if(this.teasersView)    this.teasersView.close();
         this.initialLoad();
-
-
-    /*    if (!app.teasersList){
-            this.initialLoad(); //If it's direct link initial load will load add form as well. Sync problem other wise.
-        } else{ // else u have to take care of populating side view.
-                this.teaserNewView = new app.TeasersNewView({model: new app.Teaser()});
-                $('#mainbar').html(this.teaserNewView.render().el);
-                app.addTeaserRequest = false;
-        }
-        console.log("Finished addteaser"); */
     },
 
     changeView: function(view) {
@@ -106,9 +91,10 @@ var app = app || {};
     }, 
 
     mainLoad: function(_collection){
-        //console.log('Inside main load'); 
+        //console.log(vent); 
 
-        this.teasersListView = new app.TeasersListView({page:this.p, model:_collection}); 
+
+        this.teasersListView = new app.TeasersListView({page:this.p, model:_collection, vent:vent}); 
         $('#sidebar').html(this.teasersListView.render().el);
         $("#filter").val(app.chosenFilter);
 
@@ -131,8 +117,8 @@ var app = app || {};
 
     teaserDetails: function(id){
 
-        if(this.teaserNewView){
-            this.teaserNewView.close();
+        if(this.teaserNewView != null){
+            this.teaserNewView.close(); //not working correctly
         }
 
          if(app.teasersList){

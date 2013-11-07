@@ -48,8 +48,8 @@ app.TeasersNewView = Backbone.View.extend({
                     return;
                 }
                 console.log("Model Saved!");
-                $(self.el).unbind();
-                self.remove();
+                //$(self.el).unbind();
+                //self.remove();
                 app.teasersList.add(model);
                 app.masterList.add(model);
                 app.TeaserRouter.navigate('teasers/' + self.model.id, { trigger: true });
@@ -60,8 +60,8 @@ app.TeasersNewView = Backbone.View.extend({
 
     close: function(){
         console.log("Closing the teasersNewView!");
-        this.unbind();
         this.remove();
+        this.unbind();
     },
 
 
