@@ -50,7 +50,7 @@ app.TeasersListView = Backbone.View.extend({
          } 
 
         $(this.el).append("</ul>");
-        $(this.el).append(new app.Paginator({model: this.model, page: this.page}).render().el);
+        $(this.el).append(new app.Paginator({model: this.model, page: this.options.page}).render().el);
         return this;
     },
 
