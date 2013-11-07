@@ -21,8 +21,8 @@ var app = app || {};
 	
     routes: {
 
-            //"teasers/new": "addTeaser",
-            //"teasers/edit/:id":"editTeaserDetails",
+            "teasers/new": "addTeaser",
+            "teasers/edit/:id":"editTeaserDetails",
 			"teasers/:id":"teaserDetails",
             //"filter/:id": "manageFilter",
             "teasers/page/:page": "initialLoad",

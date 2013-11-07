@@ -1,13 +1,25 @@
-module.exports = function(app, models) {
+module.exports = function(app, models, express) {
 
-
-//app.get('/', function (req, res) {
-  //res.send('Welcome');
-//});
 
 app.get('/teasers/add', function (req, res) {
 	//console.log("Received get request for to add a puzzle");
 	res.render('add');
+});
+
+app.get('/admin', function(req, res){
+ res.render('login');
+});
+
+app.post('/admin', function(req, response){
+ var email = req.body.email;
+ var password = req.body.password;
+ console.log('Request received to login received with email: ' + email + ' Password: ' + password);
+ 
+ if(email == "raosharat@gmail.com" && password =="Tenacity456!"){
+  console.log("Welcome Pandeshwar. You are authorized.");
+  //response.cookie('name', 'Pandeshwar', { signed: true });
+  response.sendfile('views/index_master.html');
+ } else 		response.send(401);
 });
 
 app.post('/teasers', function (req, res) {
