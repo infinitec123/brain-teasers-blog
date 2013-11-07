@@ -45,9 +45,9 @@ mongoose.connect(dbPath, function onMongooseError(err) {
 
 //Invoke the server
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 6873;
 
-app.listen(app.get('port'), function() {
+app.listen(port, function() {
 	console.log('Express server listening on port');
 });
 
