@@ -52,16 +52,22 @@ app.TeasersListView = Backbone.View.extend({
          } 
 
         $(this.el).append("</ul>");
-        $(this.el).append(new app.Paginator({model: this.model, page: this.options.page}).render().el);
+        this.PagerView = new app.Paginator({model: this.model, page: this.options.page});
+        $(this.el).append(this.PagerView.render().el);
         return this;
     },
 
     renderTeaser: function(item){
+        if(this.PagerView) this.PagerView.close();
         $(this.el).append(new app.TeaserListItemView({model:item}).render().el);
+        this.PagerView = new app.Paginator({model: this.model, page: this.options.page});
+        console.log(this.PagerView.render().el);
+        $(this.el).append(this.PagerView.render().el);
     },
 
     close: function(){
         console.log("Closing the teasers listView!");
+        if(this.PagerView) this.PagerView.close();
         this.remove();
         this.unbind();
     },

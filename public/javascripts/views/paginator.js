@@ -28,7 +28,13 @@ app.Paginator = Backbone.View.extend({
         }
 
         return this;
-    }
+    },
+
+    close: function(){
+        console.log("Closing the pagerView!");
+        this.remove();
+        this.unbind();
+    },
 });
 
 

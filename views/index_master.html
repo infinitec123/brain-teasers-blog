@@ -22,12 +22,18 @@
 
         <div id="mainbar">
         </div>
-
-        <footer>
-        <a href='#teasers/new' class="btn btn-link" style="color:#4B0A1E;" role="button">Add a Teaser</a>
-        </footer>
-
     </div>
+
+        <footer class="footer">
+            <div id="nav">
+            <ul>
+              <li><a href='#teasers/new' class="btn btn-link" style="color:#4B0A1E;" role="button">Add a Teaser</a></li>
+              <li><a href='/admin' class="btn btn-link" style="color:#4B0A1E;" role="button">Admin</a></li>
+              <li><a href='http://pandeshwar.herokuapp.com/contact' class="btn btn-link" style="color:#4B0A1E;" role="button">Contact</a></li>
+            </ul>
+            </div>
+
+        </footer>
 
         <script type="text/template" id="sidebar-template">
             <div class="control-group">
@@ -66,7 +72,7 @@
             <button class="btn btn-link" id="deleteButton" style="color:#4B0A1E;">Delete</button>
             
             <div class="row-fluid status-bar">
-                <div class="span5">
+                <div class="span6">
                  <div class="alert alert-success alert-dismissable" style="display: none">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                     <b>Success!</b> Teaser saved successfully!
@@ -204,7 +210,7 @@
             </div>
         </form>  
             <div class="row-fluid status-bar">
-                <div class="span4">
+                <div class="span6">
                  <div class="alert alert-success" style="display: none">
                     <b>Success!</b> Teaser saved successfully
                 </div>

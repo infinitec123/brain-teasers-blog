@@ -126,3 +126,8 @@ a.plain:hover {
     color: #333;
     text-decoration: none;
 }
+
+#nav {width:1280px; text-align: center} /*we specify a width for the parent element and we center the text for all of the child elements*/
+
+#nav li, #nav a {display: inline} /*this property will allow the text links to be centered at all times*/
+         #nav a {padding: 0 8px 9px; margin: 0 6px;} 
