@@ -2,39 +2,36 @@
 var app = app || {};
 
 (function () {
-	'use strict';
+    'use strict';
 
     var vent = {};
 
-	var TeaserRouter = Backbone.Router.extend({
+    var TeaserRouter = Backbone.Router.extend({
 
     initialize: function() {
         //console.log("initialize of router");   
         app.chosenFilter = "All";
-        app.docsPerPage = 12;
+        app.docsPerPage = 10;
         _.extend(vent, Backbone.Events);
         //console.log(vent);
         _.bindAll(this, "mF");
         vent.bind("filterrequest", this.mF);
 
     }, 
-	
+    
     routes: {
 
-            //"teasers/new": "addTeaser",
-            //"teasers/edit/:id":"editTeaserDetails",
-			"teasers/:id":"teaserDetails",
-            //"filter/:id": "manageFilter",
+            "teasers/new": "addTeaser",
+            "teasers/edit/:id":"editTeaserDetails",
+            "teasers/:id":"teaserDetails",
+            "filter/:id": "manageFilter",
             "teasers/page/:page": "initialLoad",
             "": "initialLoad"
-	},
+    },
 
 
 
     mF: function(_f){
-        //console.log("Heard an event from ListView!");
-        //console.log(_f);
-
         this.initialLoad();
     },
 
@@ -60,9 +57,10 @@ var app = app || {};
 
     initialLoad: function(page){
         this.p = page ? parseInt(page, 10) : 1;
-        console.log('Inside router for intial load for page: ' + this.p + ' With filter:: ' + app.chosenFilter);  
+        //console.log('Inside router for intial load for page: ' + this.p + ' With filter:: ' + app.chosenFilter);  
 
         if(!app.masterList){
+            //console.log('I shoulc be here 0');
             app.masterList = new app.Teasers();    
             //app.teasersList = new app.Teasers();
             var self = this;   
@@ -72,20 +70,31 @@ var app = app || {};
                 if(app.chosenFilter =="All") {
                     app.teasersList = app.masterList;
                 } else {
-                    var result = app.masterList.where({category: _filter});
+                    if(app.chosenFilter == "Easy" || app.chosenFilter == "Medium" || app.chosenFilter == "Difficult" || app.chosenFilter == "Tough"){
+                        var result = app.masterList.where({difficulty: app.chosenFilter});
+                    } else {
+                        var result = app.masterList.where({category: app.chosenFilter});
+                    }
                     app.teasersList = new app.Teasers(result); 
                 }
                 self.mainLoad(app.teasersList);             
             }
             });
         } else {
-
+                //console.log('I shoulc be here 1');
                 if(app.chosenFilter =="All") {
                     app.teasersList = app.masterList;
                 } else {
-                    var result = app.masterList.where({category: app.chosenFilter});
+
+                   // console.log("I shoulc be here2");
+                    if(app.chosenFilter == "Easy" || app.chosenFilter == "Medium" || app.chosenFilter == "Difficult" || app.chosenFilter == "Tough"){
+                        var result = app.masterList.where({difficulty: app.chosenFilter});
+                    } else {
+                        var result = app.masterList.where({category: app.chosenFilter});
+                    }
                     app.teasersList = new app.Teasers(result); 
                 }
+               // console.log(app.teasersList.length);
                 this.mainLoad(app.teasersList);   
         }
     }, 
@@ -136,8 +145,8 @@ var app = app || {};
             this.changeView(new app.TeasersEditView({model: app.teasersList.get(id)}));
     }    
 
-	});
+    });
 
-	app.TeaserRouter  = new TeaserRouter();
-	Backbone.history.start();
+    app.TeaserRouter  = new TeaserRouter();
+    Backbone.history.start();
 })();

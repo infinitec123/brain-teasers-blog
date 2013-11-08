@@ -24,8 +24,7 @@
         </div>
     </div>
 
-            <footer class="footer">
-
+        <footer class="footer">
             <div id="nav">
             <ul>
               <li><a href='#teasers/new' class="btn btn-link" style="color:#4B0A1E;" role="button">Add a Teaser</a></li>
@@ -34,12 +33,11 @@
             </ul>
             </div>
 
-            </footer>
-
+        </footer>
 
         <script type="text/template" id="sidebar-template">
             <div class="control-group">
-            <label class="control-label" style="font-size: 18px;" for="filter">Filter:</label>
+            <label class="control-label" for="filter">Filter:</label>
             <div class="controls">
                 <select name="filter" id="filter">
                     <option value="All">All</option>
@@ -47,6 +45,11 @@
                     <option value="Lateral">Lateral</option>
                     <option value="Mathematical">Mathematical</option>
                     <option value="Programmatical">Programmatical</option>
+
+                    <option value="Easy">Level: Easy</option>
+                    <option value="Medium">Level: Medium</option>
+                    <option value="Difficult">Level: Difficult</option>
+                    <option value="Tough">Level: Tough</option>
                   </select> 
             </div>
             </div>
@@ -234,7 +237,7 @@
         <script src="javascripts/views/teasersEditView.js"></script>
         <script src="javascripts/views/teasersNewView.js"></script>
         <script src="javascripts/views/teasersView.js"></script>
-        <script src="javascripts/routers/router_master.js"></script>
+        <script src="javascripts/routers/router.js"></script>
     </body>
 </html>
 
