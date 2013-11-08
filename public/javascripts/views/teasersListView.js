@@ -11,8 +11,8 @@ app.TeasersListView = Backbone.View.extend({
     initialize: function(attrs) {
 
         var self = this;
-        this.listenTo( app.teasersList, 'add', this.renderTeaser );
-        this.listenTo( app.teasersList, 'reset', this.render);
+        this.listenTo( this.model, 'add', this.renderTeaser );
+        this.listenTo( this.model, 'reset', this.render);
         this.options = attrs;
 
     },
