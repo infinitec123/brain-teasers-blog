@@ -29,7 +29,6 @@ body {
     top: 250px;
     bottom: 20px;
     width: 850px;
-    overflow-y: auto;
 }
 
 #content {

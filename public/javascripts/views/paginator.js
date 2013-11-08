@@ -7,7 +7,7 @@ var app = app || {};
 
 app.Paginator = Backbone.View.extend({
 
-    className: "pagination pagination-centered",
+    className: "pagination pagination-centered pagination-mini",
 
     initialize:function (attrs) {
         this.model.bind("reset", this.render, this);
