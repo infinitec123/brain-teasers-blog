@@ -11,7 +11,7 @@ var app = app || {};
     initialize: function() {
         //console.log("initialize of router");   
         app.chosenFilter = "All";
-        app.docsPerPage = 10;
+        app.docsPerPage = 12;
         _.extend(vent, Backbone.Events);
         //console.log(vent);
         _.bindAll(this, "mF");
