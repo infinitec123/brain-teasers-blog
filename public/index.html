@@ -65,7 +65,7 @@
             <br/>
             <h4 style="color:#4B0A1E;">Question:</h4>
             <p><%= question %></p>
-            <button type="button" class="btn btn-sm" id="toggleButton" style="color:#4B0A1E;">View/Hide Solution</button>
+            <button type="button" class="btn btn-sm" id="toggleButton" style="color:#4B0A1E;">Show Solution</button>
             <div style="display:none;" id='solutionDiv'>
             <h4 style="color:#4B0A1E;">Solution:</h4>
             <p><%= solution %></p>
@@ -73,7 +73,7 @@
             <h4 style="color:#4B0A1E;">Difficulty:</h4>
             <p><%= difficulty %></p>
             <br/>
-            <a href='#teasers/edit/<%= _id %>' class="btn btn-link" style="color:#4B0A1E;" role="button">Edit</a>
+            <a href='#teasers/edit/<%= _id %>' class="btn btn-link" style="color:#4B0A1E; padding-left: 0px;" role="button">Edit</a>
             <button class="btn btn-link" id="deleteButton" style="color:#4B0A1E;">Delete</button>
             
             <div class="row-fluid status-bar">

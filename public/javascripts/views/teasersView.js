@@ -19,9 +19,21 @@ app.TeasersView = Backbone.View.extend({
         'click button#deleteButton': 'deleteModel'
     },
 
-    toggleSolution: function(){
+    toggleSolution: function(event){
        // console.log("Request to toggle the solution");
-        $( "#solutionDiv" ).toggle();
+        //$( "#solutionDiv" ).toggle();
+        event.preventDefault();
+        var $solutionDiv = $( "#solutionDiv" );
+        
+        if ($solutionDiv.is(':hidden')) {
+         $solutionDiv.fadeIn('slow');
+         this.$('#toggleButton').text('Hide Solution')
+         //alert(this.$('#toggleButton').text());
+       } else {
+         $solutionDiv.fadeOut('slow');
+         this.$('#toggleButton').text('Show Solution')
+       }
+       return false;
     },
 
     deleteModel: function(){
