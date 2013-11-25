@@ -69,11 +69,17 @@
             <div style="display:none;" id='solutionDiv'>
             <h4 style="color:#4B0A1E;">Solution:</h4>
             <p><%= solution %></p>
+            <button class="btn btn-link" id="scrollButton" style="color:#4cacde; padding-left: 0px">Back to Top</button>
             </div>
-            <h4 style="color:#4B0A1E;">Difficulty:</h4>
-            <p><%= difficulty %></p>
+
+            <div id="diffDiv">
+                 <h4 style="color:#4B0A1E;">Difficulty:</h4>
+                 <p><%= difficulty %></p>
+            </div>
+
             <br/>
-            <a href='#teasers/edit/<%= _id %>' class="btn btn-link" style="color:#4B0A1E; padding-left: 0px;" role="button">Edit</a>
+
+            <a href='#teasers/edit/<%= _id %>' class="btn btn-link" style="color:#4B0A1E; padding-left: 0px" role="button">Edit</a>
             <button class="btn btn-link" id="deleteButton" style="color:#4B0A1E;">Delete</button>
             
             <div class="row-fluid status-bar">

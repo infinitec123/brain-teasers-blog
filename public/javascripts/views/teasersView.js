@@ -16,7 +16,19 @@ app.TeasersView = Backbone.View.extend({
 
     events:{
         'click button#toggleButton': 'toggleSolution',
-        'click button#deleteButton': 'deleteModel'
+        'click button#deleteButton': 'deleteModel',
+        'click button#scrollButton': 'scrollUp'
+    },
+
+    scrollUp: function(){
+       // alert("Request for scrolling Up!");
+       var $solutionDiv = $( "#solutionDiv" );
+       console.log("Trying to scroll up 1");
+       console.log(this.$('#solutionDiv'));
+       console.log($('#solutionDiv'));
+       $('#mainbar').scrollTop(0);
+       console.log("Trying to scroll up 2");
+       //$(window).scrollTop();
     },
 
     toggleSolution: function(event){
@@ -24,14 +36,17 @@ app.TeasersView = Backbone.View.extend({
         //$( "#solutionDiv" ).toggle();
         event.preventDefault();
         var $solutionDiv = $( "#solutionDiv" );
+        var $diffDiv = $('#diffDiv');
         
         if ($solutionDiv.is(':hidden')) {
          $solutionDiv.fadeIn('slow');
          this.$('#toggleButton').text('Hide Solution')
+         $diffDiv.hide();
          //alert(this.$('#toggleButton').text());
        } else {
          $solutionDiv.fadeOut('slow');
          this.$('#toggleButton').text('Show Solution')
+         $diffDiv.show();
        }
        return false;
     },
