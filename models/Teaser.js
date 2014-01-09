@@ -12,6 +12,9 @@ var TeaserSchema = new mongoose.Schema({
         difficulty: { type: String, enum: DIFFICULTY_LEVELS },    
         category: { type: String, enum: TEASER_TYPE } 
 });
+TeaserSchema.index({category: 1});
+
+
 //Models
 var Teaser = mongoose.model('Teaser', TeaserSchema );
 
@@ -32,6 +35,18 @@ var Teaser = mongoose.model('Teaser', TeaserSchema );
           callback("Failed");
         }
       });
+  };
+
+  var findByCategory = function(_category, callback){
+    console.log("Got request for puzzles of category " + _category);
+    Teaser.find({category : _category }, function(err, teasers){
+      if(!err){
+        callback(teasers);
+      } else {
+        callback("Failed");
+      }
+    });
+    
   };
 
   var findAll = function(callback) {
@@ -109,6 +124,7 @@ var Teaser = mongoose.model('Teaser', TeaserSchema );
   return {
     findById: findById,
     findAll: findAll,
+    findByCategory: findByCategory,
     addTeaser:addTeaser,
     updateTeaser:updateTeaser,
     deleteById: deleteById

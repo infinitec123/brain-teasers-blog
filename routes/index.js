@@ -13,7 +13,7 @@ app.get('/admin', function(req, res){
 app.post('/admin', function(req, response){
  var email = req.body.email;
  var password = req.body.password;
- console.log('Request received to login received with email: ' + email + ' Password: ' + password);
+ console.log('Request received tPo login received with email: ' + email + ' Password: ' + password);
  
  if(email == "raosharat@gmail.com" && password =="Tenacity456!"){
   console.log("Welcome Pandeshwar. You are authorized.");
@@ -38,8 +38,6 @@ app.post('/teasers', function (req, res) {
 	}
 	//console.log("Will call model method");
 	models.Teaser.addTeaser(_title, _question, _solution, _category, _difficulty, _image_name, function(_teaser){
-		//console.log("Back to router");
-		//console.log(_teaser);
 		res.send(_teaser);
 	});
 	
@@ -55,12 +53,7 @@ app.put('/teasers/:id', function (req, res) {
 	var _category = req.body.category;
 	var _difficulty = req.body.difficulty;
 	var _image_name = req.body.image_name;
-	//console.log('Title::' + _title);
-	//console.log('Question::' + _question);
-	//console.log('Solution::' + _solution);
-	//console.log('Image Name::' + _image_name);
-	//console.log('category::' + _category);
-	//console.log('Difficulty::' + _difficulty);
+
 	if(_title == "" || _question.length < 5 || _solution.length < 5){ 
 		res.send(400);
      	return;
@@ -76,28 +69,28 @@ app.get('/teasers', function (req, res) {
   			//console.log("Back to callback");
   			res.send(teasers);
   	});	
-	//res.send('Noticed');
 });
 
 app.get('/teasers/:id', function (req, res) {
 	var _id = req.params.id;
 	//console.log("Received get request for teaser with id:: " + _id);
   	models.Teaser.findById(_id, function(teaser){
-  			console.log("Back to callback");
-  			res.send(teaser);
+  	  res.send(teaser);
   	});		
-	//if (!(_category == "logical" || _category == "lateral" || _category == "mathematical" || _category == "programmatical")){
-		//res.send(404);
-	//} else{
-		//console.log("Received get request for the type:: " + req.params.id);
-  		//res.send(200);
-	//}
 });
+
+app.get('/puzzles/:category', function (req, res) {
+	var _category = req.params.category;
+  	models.Teaser.findByCategory(_category, function(teasers){
+		res.send(teasers);
+  	});		
+});
+
 
 
 app.delete('/teasers/:id', function (req, res) {
 	var _id = req.params.id;
-	//console.log("Received delete request for teaser with id:: " + _id);
+	console.log("Received delete request for teaser with id:: " + _id);
 	if ( null == _id ) {
       res.send(400);
       return;

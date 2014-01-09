@@ -3,7 +3,6 @@ body {
       padding-bottom: 30px;
 
 }
-
 * {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 18px;
@@ -23,6 +22,7 @@ body {
     overflow-y: auto;
 }
 
+
 #mainbar {
     position: absolute;
     left: 500px;
@@ -30,6 +30,10 @@ body {
     bottom: 20px;
     width: 850px;
     overflow-y: auto;
+}
+
+h2, h4 {
+    color:#4B0A1E;
 }
 
 #content {
@@ -57,6 +61,7 @@ ul {
     list-style-type: none;
     padding-left: 0px;
     margin-top: 0px;
+    margin: 0 0 10px 5px;
 }
 
 li a {
@@ -106,10 +111,27 @@ button {
     padding: 6px;
 }
 
-
 a.plain:link {
     color: #333;
     text-decoration: none;
+}
+
+#toggleButton, #deleteButton {
+color:#4B0A1E;
+}
+
+#solutionDiv{
+    display: none;
+}
+
+#scrollButton{
+    color:#4cacde;
+    padding-left: 0px;
+}
+
+.btn-link {
+    color:#4B0A1E;
+    padding-left: 0px;
 }
 
 a.plain:active {
@@ -130,4 +152,4 @@ a.plain:hover {
 #nav {width:1280px; text-align: center} /*we specify a width for the parent element and we center the text for all of the child elements*/
 
 #nav li, #nav a {display: inline} /*this property will allow the text links to be centered at all times*/
-         #nav a {padding: 0 8px 9px; margin: 0 6px;} 
+         #nav a {padding: 0 8px 9px; margin: 0 6px; color:#4B0A1E;} 

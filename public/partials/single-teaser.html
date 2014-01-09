@@ -1,0 +1,30 @@
+    <h2>{{ teaser.title }}</h2>
+    <img height="150" ng-src="{{image_path}}"/>
+    <br/>
+    <h4>Question:</h4>
+    <p>{{teaser.question}}</p>
+    <button type="button" class="btn btn-sm" id="toggleButton" ng-click="toggleSolutionDiv()">Show Solution</button>
+    <div id='solutionDiv'>
+    <h4>Solution:</h4>
+    <p>{{teaser.solution}}</p>
+    <button class="btn btn-link" id="scrollButton" ng-click="scrollUp()">Back to Top</button>
+    </div>
+
+    <div id="diffDiv">
+         <h4>Difficulty:</h4>
+         <p>{{teaser.difficulty}}</p>
+    </div>
+
+    <br/>
+
+    <a href='#teasers/edit/{{ teaser._id}}' class="btn btn-link" role="button">Edit</a>
+    <button class="btn btn-link" id="deleteButton" ng-click="deleteTeaser()">Delete</button>
+    
+    <div class="row-fluid status-bar">
+        <div class="span6">
+         <div class="alert alert-success alert-dismissable" style="display: none">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <b>Success!</b> Teaser saved successfully!
+        </div>
+        </div>
+    </div>
