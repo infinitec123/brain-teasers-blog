@@ -2,11 +2,11 @@
     <img height="150" ng-src="{{image_path}}"/>
     <br/>
     <h4>Question:</h4>
-    <p>{{teaser.question}}</p>
-    <button type="button" class="btn btn-sm" id="toggleButton" ng-click="toggleSolutionDiv()">Show Solution</button>
-    <div id='solutionDiv'>
+    <p ng-bind-html="teaser.question"></p>
+    <button type="button" class="btn btn-sm" id="toggleButton" ng-click="toggleSolutionDiv()">{{buttonText}}</button>
+    <div id='solutionDiv' ng-hide="returnDivHideStatus()">
     <h4>Solution:</h4>
-    <p>{{teaser.solution}}</p>
+    <p ng-bind-html="teaser.solution"></p>
     <button class="btn btn-link" id="scrollButton" ng-click="scrollUp()">Back to Top</button>
     </div>
 

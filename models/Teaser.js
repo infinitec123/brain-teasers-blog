@@ -38,28 +38,23 @@ var Teaser = mongoose.model('Teaser', TeaserSchema );
   };
 
   var findByCategory = function(_category, callback){
-    console.log("Got request for puzzles of category " + _category);
-    Teaser.find({category : _category }, function(err, teasers){
+    Teaser.find({category : _category}).sort({title: 1}).exec(function(err,teasers){
       if(!err){
-        callback(teasers);
+          callback(teasers);
       } else {
-        callback("Failed");
+          callback("Failed");
       }
     });
-    
   };
 
   var findAll = function(callback) {
-      //console.log("Get all request in model");
-      Teaser.find(function(err, teasers){
-        if(!err){
-          //console.log("Retrieved all books succssfully");
+    Teaser.find({}).sort({title: 1}).exec(function(err,teasers){
+      if(!err){
           callback(teasers);
-        } else {
+      } else {
           callback("Failed");
-        }
-      });
-      
+      }
+    });
   };
 
   var addTeaser = function(_title, _question, _solution, _category, _difficulty, _image_name, callback) {
@@ -87,7 +82,7 @@ var Teaser = mongoose.model('Teaser', TeaserSchema );
     console.log('Save command was sent');
   };
 
-  var updateTeaser = function(teaserId, _title, _question, _solution, _category, _difficulty, _image_name) {
+  var updateTeaser = function(teaserId, _title, _question, _solution, _category, _difficulty, _image_name, callback) {
     console.log('Inside Teaser for update');
     var conditions = { _id: teaserId };
     var update = { 
@@ -100,12 +95,28 @@ var Teaser = mongoose.model('Teaser', TeaserSchema );
     }; 
     var options = { multi: false };
 
-    function callback (err, numAffected) {
-      if(!err){ console.log("Modified " + numAffected + " documents"); }
-      else { console.log("Failed to modify"); console.log(err);}
-    };
+    //function callback (err, numAffected) {
+      //if(!err){ console.log("Modified " + numAffected + " documents"); }
+      //else { console.log("Failed to modify"); console.log(err);}
+    //};
 
-    Teaser.update(conditions, update, options, callback);
+    Teaser.update(conditions, update, options, function(err, numAffected){
+      if(!err){
+
+      var updated_doc = { 
+        title: _title,
+        _id: teaserId,
+        question: _question,
+        solution: _solution,
+        image_name: _image_name,
+        difficulty: _difficulty,
+        category: _category
+      };
+        callback(updated_doc);
+      } else {
+        callback('Failed');
+      }
+    });
   };
 
   var deleteById = function(teaserId, callback) {

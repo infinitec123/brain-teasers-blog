@@ -4,6 +4,7 @@
 
 var TeasersApp = angular.module('TeasersApp', [
 	'ngRoute',
+	'ngSanitize',
 	'TeasersAppServices',
 	'TeasersAppControllers'
 	]);
@@ -26,6 +27,5 @@ TeasersApp.config(['$routeProvider',
 	}]);
 
 TeasersApp.config(['$locationProvider', function($locationProvider){
-	console.log('Here');
 	//$locationProvider.html5Mode(true);
 }]);

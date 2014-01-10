@@ -10,7 +10,7 @@
     <body>
 
 
-    <div class="container" ng-controller="main_controller">
+    <div class="container" ng-controller="main_controller" ng-cloak>
 
       <div class="hero-unit">
         <h1 style="color:#4B0A1E;">Brain Teasers Blog!</h1>
@@ -44,7 +44,6 @@
             </li>
           </ul>
 
-
         </div>
 
         <div id="mainbar" ng-view>
@@ -67,6 +66,7 @@
         <script src="javascripts/lib/angular/angular.js"></script>
         <script src="javascripts/lib/angular/angular-resource.js"></script>
         <script src="javascripts/lib/angular/angular-route.js"></script>
+        <script src="javascripts/lib/angular/angular-sanitize.js"></script>
         <script src="javascripts/app.js"></script>
         <script src="javascripts/services.js"></script>
         <script src="javascripts/controllers.js"></script>     

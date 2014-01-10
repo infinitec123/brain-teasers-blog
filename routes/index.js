@@ -58,8 +58,10 @@ app.put('/teasers/:id', function (req, res) {
 		res.send(400);
      	return;
 	} 
-	models.Teaser.updateTeaser(_id, _title, _question, _solution, _category, _difficulty, _image_name);
-	res.send('Teaser Updated');
+	models.Teaser.updateTeaser(_id, _title, _question, _solution, _category, _difficulty, _image_name, function(_teaser){
+		res.send(_teaser);
+	});
+	
 });
 
 
