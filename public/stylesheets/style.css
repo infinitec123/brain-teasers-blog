@@ -145,6 +145,10 @@ a.plain:hover {
     text-decoration: none;
 }
 
+.help-inline { margin-bottom: 9px; }
+.error { border: dashed red 1px; }
+.success { border: dotted  green 1px; }
+
 #nav {width:1280px; text-align: center} /*we specify a width for the parent element and we center the text for all of the child elements*/
 
 #nav li, #nav a {display: inline} /*this property will allow the text links to be centered at all times*/

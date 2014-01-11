@@ -8,26 +8,51 @@ TeasersAppControllers.controller('main_controller', ['$scope', 'Teaser',
 	function($scope, Teaser){
 		$scope.teasers = Teaser.query();
 		$scope.category = '';
-		$scope.temp = 'Sharath\nPandeshwar';
 	}]);
+
+
+
+
 
 TeasersAppControllers.controller('add_controller', ['$scope', '$location', 'Teaser', 
 	function($scope, $location, Teaser){
+		
 		$scope.teaser = new Teaser({});
 
 		//Setting some default values;
 		$scope.teaser.category = 'Logical';
-		$scope.teaser.difficulty = 'Medium'
+		$scope.teaser.difficulty = 'Medium';
+		$scope.teaser.image_name = 'how.jpg';
 
 		$scope.addNewTeaser = function(){
-	 		//Skiping Validation for now
+
 	      $scope.teaser.$save(function () {
-          $location.path('/');
           $scope.teasers.push($scope.teaser);
+          $location.path('/teasers/' + $scope.teaser._id);
       	});
 		};
+
+		$scope.getCssClasses = function(ngModelController){
+			return {
+				error: ngModelController.$invalid && ngModelController.$dirty, 
+				success: ngModelController.$valid && ngModelController.$dirty
+			}
+		};
+
+		$scope.showError = function(ngModelController, error){
+			return ngModelController.$error[error];
+		};
+
+		$scope.canSave = function(){
+			return $scope.TeaserEntryForm.$dirty && $scope.TeaserEntryForm.$valid;
+		}
 		
 	}]);
+
+
+
+
+
 
 TeasersAppControllers.controller('edit_controller', ['$scope', '$location', 'Teaser', '$routeParams',
 	function($scope, $location, Teaser, $routeParams){
@@ -35,7 +60,6 @@ TeasersAppControllers.controller('edit_controller', ['$scope', '$location', 'Tea
 		$scope.teaser = Teaser.get({id: $routeParams.teaserid}, function(teaser){});
 
 		$scope.addNewTeaser = function(){
-	 		//Skiping Validation for now
 
 	      var _pos_in_array = -1;
 		  $scope.teasers.forEach(function(_t, index){
@@ -49,30 +73,57 @@ TeasersAppControllers.controller('edit_controller', ['$scope', '$location', 'Tea
             $location.path('/teasers/' + $routeParams.teaserid);
       	   });
 		};
+
+		$scope.getCssClasses = function(ngModelController){
+			return {
+				error: ngModelController.$invalid && ngModelController.$dirty, 
+				success: ngModelController.$valid && ngModelController.$dirty
+			}
+		};
+
+		$scope.showError = function(ngModelController, error){
+			return ngModelController.$error[error];
+		};
+
+		$scope.canSave = function(){
+			//console.log('called2');
+			//return true;
+			return $scope.TeaserEntryForm.$dirty && $scope.TeaserEntryForm.$valid;
+		};
+
+
+
 	}]);
+
+
+
+
+
+
+
 
 TeasersAppControllers.controller('single_controller', ['$scope', '$routeParams', 'Teaser', '$location', 
 	function($scope, $routeParams, Teaser, $location){
-		//$scope.teasers = Teaser.query();
 
 		$scope.category = '';
 		$scope.isDivHidden = true;
 		$scope.buttonText = 'Show Solution';
 
-		$scope.teaser = Teaser.get({id: $routeParams.teaserid}, function(teaser){
-			$scope.image_path = 'images/' + teaser.image_name;
-		});
+		if($routeParams.teaserid){
+			$scope.teaser = Teaser.get({id: $routeParams.teaserid}, function(teaser){
+				$scope.image_path = '/images/' + teaser.image_name;
+			});
+		} else {
+			$scope.teaser = $scope.teasers[0];
+			$scope.image_path = '/images/' + $scope.teaser.image_name;
+		}
 
 		//console.log($scope.teasers);
 		$scope.scrollUp = function(){
-			//Bad code. 
 			$('#mainbar').scrollTop(0);
 		};
 
 		$scope.deleteTeaser = function(){
-			
-			//var index= $scope.teasers.indexOf($scope.teaser);
-			//alert(index);
 			var _pos_in_array = -1;
 			$scope.teasers.forEach(function(_t, index){
 				if(_t._id === $routeParams.teaserid){
@@ -83,7 +134,7 @@ TeasersAppControllers.controller('single_controller', ['$scope', '$routeParams',
 			  alert('Successfully deleted!');
 			  $scope.teasers.splice(_pos_in_array, 1);
 			});
-			$location.path('/');
+			$location.path('/').replace();
 		};
 
 		$scope.toggleSolutionDiv = function(){
@@ -97,6 +148,6 @@ TeasersAppControllers.controller('single_controller', ['$scope', '$routeParams',
 
 		$scope.returnDivHideStatus = function(){
 			return $scope.isDivHidden;
-		}
+		};
 
 	}]);

@@ -1,7 +1,7 @@
 module.exports = function(app, models, express) {
 
 
-app.get('/teasers/add', function (req, res) {
+app.get('/api/teasers/add', function (req, res) {
 	//console.log("Received get request for to add a puzzle");
 	res.render('add');
 });
@@ -22,7 +22,7 @@ app.post('/admin', function(req, response){
  } else 		response.send(401);
 });
 
-app.post('/teasers', function (req, res) {
+app.post('/api/teasers', function (req, res) {
 	console.log("Received post request for to add a puzzle");
 	
 	var _title = req.body.title;
@@ -43,7 +43,7 @@ app.post('/teasers', function (req, res) {
 	
 });
 
-app.put('/teasers/:id', function (req, res) {
+app.put('/api/teasers/:id', function (req, res) {
 	console.log("Received update request for to modify a puzzle");
 	
 	var _id = req.params.id;
@@ -65,7 +65,7 @@ app.put('/teasers/:id', function (req, res) {
 });
 
 
-app.get('/teasers', function (req, res) {
+app.get('/api/teasers', function (req, res) {
   	//console.log("Received get request for all:: ");
   	models.Teaser.findAll(function(teasers){
   			//console.log("Back to callback");
@@ -73,7 +73,7 @@ app.get('/teasers', function (req, res) {
   	});	
 });
 
-app.get('/teasers/:id', function (req, res) {
+app.get('/api/teasers/:id', function (req, res) {
 	var _id = req.params.id;
 	//console.log("Received get request for teaser with id:: " + _id);
   	models.Teaser.findById(_id, function(teaser){
@@ -90,7 +90,7 @@ app.get('/puzzles/:category', function (req, res) {
 
 
 
-app.delete('/teasers/:id', function (req, res) {
+app.delete('/api/teasers/:id', function (req, res) {
 	var _id = req.params.id;
 	console.log("Received delete request for teaser with id:: " + _id);
 	if ( null == _id ) {
@@ -104,7 +104,12 @@ app.delete('/teasers/:id', function (req, res) {
   	//res.send('Deleted');		
 });
 
-
+app
+  // Point all requests at one file
+  .get('*', function (req, res) {
+  	console.log('Index.html served');
+    res.sendfile('public/index.html');
+  });
 
 }    
 

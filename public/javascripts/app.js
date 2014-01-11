@@ -14,18 +14,23 @@ TeasersApp.config(['$routeProvider',
 	  $routeProvider.
 		when('/teasers/new', {
 			controller: 'add_controller',
-			templateUrl: 'partials/add-teaser.html'
+			templateUrl: '/partials/add-teaser.html'
 		}).
 		when('/teasers/edit/:teaserid', {
 			controller: 'edit_controller',
-			templateUrl: 'partials/add-teaser.html'
+			templateUrl: '/partials/add-teaser.html'
 		}).
 		when('/teasers/:teaserid', {
 			controller: 'single_controller',
-			templateUrl: 'partials/single-teaser.html'
-		});
+			templateUrl: '/partials/single-teaser.html'
+		}).
+		when('/', {
+			controller: 'single_controller',
+			templateUrl: '/partials/single-teaser.html'
+		}).
+		otherwise({redirectTo: '/'});
 	}]);
 
 TeasersApp.config(['$locationProvider', function($locationProvider){
-	//$locationProvider.html5Mode(true);
+	$locationProvider.html5Mode(true);
 }]);

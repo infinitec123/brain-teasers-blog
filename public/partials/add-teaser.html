@@ -1,38 +1,47 @@
 <h4 style="color:#4B0A1E;">Add</h4>
-<form class="form-horizontal">
+<form class="form-horizontal" name="TeaserEntryForm">
 
-    <div class="control-group">
+    <div class="control-group" ng-class="getCssClasses(TeaserEntryForm.title)">
     <label class="control-label" for="title">Title</label>
     <div class="controls">
-    <input type="text" ng-model="teaser.title" id="titleAddinput" style="width:450px;" name="title" placeholder="Title" > </input>
+    <input type="text" name= "title" ng-model="teaser.title" style="width:450px;" placeholder="Title" required ng-minlength="8" >
+    <span ng-show="showError(TeaserEntryForm.title, 'required')" class="help-inline">Required</span>
+    <span ng-show="showError(TeaserEntryForm.title, 'minlength')" class="help-inline">Min 8 characters.</span>
     </div>
+    
     </div>
 
-    <div class="control-group">
+    <div class="control-group" ng-class="getCssClasses(TeaserEntryForm.question)">
     <label class="control-label" for="question">Question</label>
     <div class="controls">
-    <textarea rows="5" ng-model="teaser.question" id="questionAddinput" name="question" placeholder="Question" style="width:450px;"></textarea>
+    <textarea rows="5" name="question" ng-model="teaser.question" placeholder="Question" style="width:450px;" required ng-minlength="20"></textarea>
+    <span ng-show="showError(TeaserEntryForm.question, 'required')" class="help-inline">Required</span>
+    <span ng-show="showError(TeaserEntryForm.question, 'minlength')" class="help-inline">Min 20 characters.</span>
     </div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group" ng-class="getCssClasses(TeaserEntryForm.solution)">
     <label class="control-label" for="solution">Solution</label>
     <div class="controls">
-    <textarea rows="8" ng-model="teaser.solution" id="solutionAddinput" name="solution" placeholder="Solution" style="width:450px;"></textarea>
+    <textarea rows="8" name="solution" ng-model="teaser.solution" placeholder="Solution" style="width:450px;" required ng-minlength="20"></textarea>
+    <span ng-show="showError(TeaserEntryForm.solution, 'required')" class="help-inline">Required</span>
+    <span ng-show="showError(TeaserEntryForm.solution, 'minlength')" class="help-inline">Min 20 characters.</span>
     </div>
     </div>
 
-    <div class="control-group">
+    <div class="control-group" ng-class="getCssClasses(TeaserEntryForm.image)">
     <label class="control-label" for="image_url">Image Name</label>
     <div class="controls">
-    <input type="text" ng-model="teaser.image_name" id="image_name_add" style="width:250px;" name="image_url" >
+    <input type="text" name="image" ng-model="teaser.image_name" style="width:250px;" required ng-pattern="/\w+\.(jpg|png)/">
+    <span ng-show="showError(TeaserEntryForm.image, 'required')" class="help-inline">Required</span>
+    <span ng-show="showError(TeaserEntryForm.image, 'pattern')" class="help-inline">Must end with .jpg or .png</span>
     </div>
     </div>
 
     <div class="control-group">
     <label class="control-label" for="category">Category</label>
     <div class="controls">
-        <select ng-model="teaser.category" name="category" id="category_add">
+        <select ng-model="teaser.category">
             <option>Logical</option>
             <option>Lateral</option>
             <option>Mathematical</option>
@@ -44,7 +53,7 @@
     <div class="control-group">
     <label class="control-label" for="difficulty">Difficulty</label>
     <div class="controls">
-        <select ng-model="teaser.difficulty" name="difficulty" id="difficulty_add">
+        <select ng-model="teaser.difficulty">
             <option>Medium</option>
             <option>Easy</option>
             <option>Difficult</option>
@@ -54,7 +63,7 @@
     </div>
     <div class="control-group">
     <div class="controls">
-    <button ng-click="addNewTeaser()" class="btn btn-primary" id="addChanges">Submit</button>    
+    <button ng-click="addNewTeaser()" ng-disabled="!canSave()" class="btn btn-primary">Submit</button>    
     </div>
     </div>
 </form>  
