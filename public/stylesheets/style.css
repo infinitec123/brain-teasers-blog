@@ -32,6 +32,13 @@ body {
     overflow-y: auto;
 }
 
+#mainlogo {
+    display:block;
+    margin:auto;
+    vertical-align: middle ;
+    margin-top: 50px;
+}
+
 h2, h4 {
     color:#4B0A1E;
 }

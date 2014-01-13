@@ -7,10 +7,17 @@ var TeasersAppControllers = angular.module('TeasersAppControllers', []);
 TeasersAppControllers.controller('main_controller', ['$scope', 'Teaser', 
 	function($scope, Teaser){
 		$scope.teasers = Teaser.query();
+		//$scope.teasers = teasers;
 		$scope.category = '';
-	}]);
+		//$scope.teaser = $scope.teasers[0];
+	}]); 
 
-
+TeasersAppControllers.controller('login_controller', ['$scope', '$http', function($scope, $http){
+	$scope.LogMeIn = function(){
+		alert('here');
+		var request = $http.get('/auth/facebook');
+	}
+}]);
 
 
 
@@ -109,15 +116,10 @@ TeasersAppControllers.controller('single_controller', ['$scope', '$routeParams',
 		$scope.isDivHidden = true;
 		$scope.buttonText = 'Show Solution';
 
-		if($routeParams.teaserid){
-			$scope.teaser = Teaser.get({id: $routeParams.teaserid}, function(teaser){
-				$scope.image_path = '/images/' + teaser.image_name;
-			});
-		} else {
-			$scope.teaser = $scope.teasers[0];
-			$scope.image_path = '/images/' + $scope.teaser.image_name;
-		}
-
+		$scope.teaser = Teaser.get({id: $routeParams.teaserid}, function(teaser){
+			$scope.image_path = '/images/' + teaser.image_name;
+		});
+		
 		//console.log($scope.teasers);
 		$scope.scrollUp = function(){
 			$('#mainbar').scrollTop(0);

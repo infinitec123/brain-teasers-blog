@@ -1,5 +1,15 @@
-module.exports = function(app, models, express) {
+module.exports = function(app, models, passport) {
 
+var Auth = require('../lib/authorization');
+
+var isAuthenticated = function(req, res, next){
+	if(req.isAuthenticated()){
+		next();
+	} else {
+		//res.redirect('/admin'); //to be changed to /contact
+		res.send(401);
+	}
+};
 
 app.get('/api/teasers/add', function (req, res) {
 	//console.log("Received get request for to add a puzzle");
@@ -7,24 +17,26 @@ app.get('/api/teasers/add', function (req, res) {
 });
 
 app.get('/admin', function(req, res){
+ console.log("Received get to admin form");
  res.render('login');
 });
 
-app.post('/admin', function(req, response){
- var email = req.body.email;
- var password = req.body.password;
- console.log('Request received tPo login received with email: ' + email + ' Password: ' + password);
- 
- if(email == "raosharat@gmail.com" && password =="Tenacity456!"){
-  console.log("Welcome Pandeshwar. You are authorized.");
-  //response.cookie('name', 'Pandeshwar', { signed: true });
-  response.sendfile('views/index_master.html');
- } else 		response.send(401);
-});
+app.get('/auth/facebook', passport.authenticate("facebook", {scope:"email"}));
 
-app.post('/api/teasers', function (req, res) {
-	console.log("Received post request for to add a puzzle");
-	
+app.get("/auth/facebook/callback", 
+    passport.authenticate("facebook",{ failureRedirect: '/admin'}),
+    function(req,res){
+
+    	if(req.user.facebook.email == 'raosharat@gmail.com'){
+    		res.sendfile('public/index.html');
+    	} else {
+    		res.send(401);
+    	}
+    }
+  );
+
+app.post('/api/teasers', isAuthenticated, function (req, res) {
+
 	var _title = req.body.title;
 	var _question = req.body.question;
 	var _solution=req.body.solution;
@@ -43,7 +55,7 @@ app.post('/api/teasers', function (req, res) {
 	
 });
 
-app.put('/api/teasers/:id', function (req, res) {
+app.put('/api/teasers/:id', isAuthenticated, function (req, res) {
 	console.log("Received update request for to modify a puzzle");
 	
 	var _id = req.params.id;
@@ -67,15 +79,20 @@ app.put('/api/teasers/:id', function (req, res) {
 
 app.get('/api/teasers', function (req, res) {
   	//console.log("Received get request for all:: ");
+  	
+  	if(req.isAuthenticated()){
+		console.log('Authenticaled user***********');
+	} else {
+		console.log('Not Authenticaled user***********')
+	}
+
   	models.Teaser.findAll(function(teasers){
-  			//console.log("Back to callback");
   			res.send(teasers);
   	});	
 });
 
 app.get('/api/teasers/:id', function (req, res) {
 	var _id = req.params.id;
-	//console.log("Received get request for teaser with id:: " + _id);
   	models.Teaser.findById(_id, function(teaser){
   	  res.send(teaser);
   	});		
@@ -90,7 +107,7 @@ app.get('/puzzles/:category', function (req, res) {
 
 
 
-app.delete('/api/teasers/:id', function (req, res) {
+app.delete('/api/teasers/:id', isAuthenticated, function (req, res) {
 	var _id = req.params.id;
 	console.log("Received delete request for teaser with id:: " + _id);
 	if ( null == _id ) {
@@ -98,16 +115,13 @@ app.delete('/api/teasers/:id', function (req, res) {
       return;
     }
   	models.Teaser.deleteById(_id, function(result){
-  		//console.log("Res::" + result);
   		res.send(result);
-  	});
-  	//res.send('Deleted');		
+  	});		
 });
 
 app
   // Point all requests at one file
   .get('*', function (req, res) {
-  	console.log('Index.html served');
     res.sendfile('public/index.html');
   });
 
