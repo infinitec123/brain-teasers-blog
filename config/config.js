@@ -6,7 +6,7 @@ module.exports = {
 		facebook: {
 			clientID: "649397001786269",
 			clientSecret: "378d786f9071b417353cdb42fabe06de",
-			callbackURL: "http://localhost:8080/auth/facebook/callback"
+			callbackURL: "http://brain-teasers-blog.herokuapp.com/auth/facebook/callback"
 		}
 	},
   	production: {
@@ -16,7 +16,7 @@ module.exports = {
 		facebook: {
 			clientID: "649397001786269",
 			clientSecret: "378d786f9071b417353cdb42fabe06de",
-			callbackURL: "http://localhost:8080/auth/facebook/callback"
+			callbackURL: "http://brain-teasers-blog.herokuapp.com/auth/facebook/callback"
 		}
  	}
 }
