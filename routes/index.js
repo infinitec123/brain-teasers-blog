@@ -18,7 +18,7 @@ app.get('/api/teasers/add', function (req, res) {
 
 app.get('/nonadmin', function(req, res){
  //console.log("Received get to admin form");
- res.render('message');
+ res.send(401);
 });
 
 app.get('/auth/facebook', passport.authenticate("facebook", {scope:"email"}));
