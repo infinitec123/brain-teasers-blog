@@ -16,15 +16,15 @@ app.get('/api/teasers/add', function (req, res) {
 	res.render('add');
 });
 
-app.get('/admin', function(req, res){
- console.log("Received get to admin form");
- res.render('login');
+app.get('/nonadmin', function(req, res){
+ //console.log("Received get to admin form");
+ res.render('message');
 });
 
 app.get('/auth/facebook', passport.authenticate("facebook", {scope:"email"}));
 
 app.get("/auth/facebook/callback", 
-    passport.authenticate("facebook",{ failureRedirect: '/admin'}),
+    passport.authenticate("facebook",{ failureRedirect: '/nonadmin'}),
     function(req,res){
 
     	if(req.user.facebook.email == 'raosharat@gmail.com'){
