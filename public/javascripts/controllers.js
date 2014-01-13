@@ -12,7 +12,7 @@ TeasersAppControllers.controller('main_controller', ['$scope', 'Teaser', 'Pagina
 
 		futureResponse.success(function (data, status, headers, config) {
      		$scope.teasers = data;
-     		$scope.pagination = Pagination.getNew();
+     		$scope.pagination = Pagination.getNew(8);
      		$scope.pagination.numPages = Math.ceil($scope.teasers.length/$scope.pagination.perPage);
      		//console.log(data);
    		});
