@@ -80,12 +80,6 @@ app.put('/api/teasers/:id', isAuthenticated, function (req, res) {
 app.get('/api/teasers', function (req, res) {
   	//console.log("Received get request for all:: ");
   	
-  	if(req.isAuthenticated()){
-		console.log('Authenticaled user***********');
-	} else {
-		console.log('Not Authenticaled user***********')
-	}
-
   	models.Teaser.findAll(function(teasers){
   			res.send(teasers);
   	});	

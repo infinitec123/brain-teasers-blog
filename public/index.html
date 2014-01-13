@@ -39,10 +39,26 @@
           </div>
     
           <ul class="teasers">
-            <li ng-repeat="teaser in teasers | filter:query | filter: category">
+            <li ng-repeat="teaser in teasers | filter:query | filter: category | startFrom: pagination.page * pagination.perPage | limitTo: pagination.perPage ">
                 <a href='/teasers/{{teaser._id}}'>{{teaser.title}}</a>
             </li>
           </ul>
+          <br/>
+          <button type="button" class="btn btn-default btn-sm" ng-hide="pagination.page == 0" ng-click="pagination.prevPage()"><</button>
+
+          
+            <span ng-repeat="n in [] | range: pagination.numPages">
+                <button type="button" class="btn btn-default btn-xs" ng-click="pagination.toPageId(n)">{{n + 1}}</button>
+            </span>    
+            
+            <!-- <button type="button" class="btn btn-default btn-xs" ng-click="pagination.toPageId(n)">{{n + 1}}</button> -->
+  
+          
+          <button type="button" class="btn btn-default btn-sm" ng-hide="pagination.page + 1 >= pagination.numPages" ng-click="pagination.nextPage()">></button>
+        
+        <br/><br/>
+
+
 
         </div>
 
@@ -67,6 +83,7 @@
         <script src="/javascripts/lib/angular/angular-resource.js"></script>
         <script src="/javascripts/lib/angular/angular-route.js"></script>
         <script src="/javascripts/lib/angular/angular-sanitize.js"></script>
+        <script src="/javascripts/lib/vendor/simplePagination.js"></script>
         <script src="/javascripts/app.js"></script>
         <script src="/javascripts/services.js"></script>
         <script src="/javascripts/controllers.js"></script>     

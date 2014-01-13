@@ -6,7 +6,8 @@ var TeasersApp = angular.module('TeasersApp', [
 	'ngRoute',
 	'ngSanitize',
 	'TeasersAppServices',
-	'TeasersAppControllers'
+	'TeasersAppControllers',
+	'SimplePagination'
 	]);
 
 TeasersApp.config(['$routeProvider',  

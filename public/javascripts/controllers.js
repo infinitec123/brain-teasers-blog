@@ -4,19 +4,29 @@
 
 var TeasersAppControllers = angular.module('TeasersAppControllers', []);
 
-TeasersAppControllers.controller('main_controller', ['$scope', 'Teaser', 
-	function($scope, Teaser){
-		$scope.teasers = Teaser.query();
-		//$scope.teasers = teasers;
+TeasersAppControllers.controller('main_controller', ['$scope', 'Teaser', 'Pagination', '$http',
+	function($scope, Teaser, Pagination, $http){
+
+		var futureResponse = $http.get('/api/teasers'); 
+		
+
+		futureResponse.success(function (data, status, headers, config) {
+     		$scope.teasers = data;
+     		$scope.pagination = Pagination.getNew();
+     		$scope.pagination.numPages = Math.ceil($scope.teasers.length/$scope.pagination.perPage);
+     		//console.log(data);
+   		});
+
+		//$scope.teasers = Teaser.query();
+
 		$scope.category = '';
 		//$scope.teaser = $scope.teasers[0];
+		
+		
 	}]); 
 
 TeasersAppControllers.controller('login_controller', ['$scope', '$http', function($scope, $http){
-	$scope.LogMeIn = function(){
-		alert('here');
-		var request = $http.get('/auth/facebook');
-	}
+
 }]);
 
 
